@@ -1,20 +1,21 @@
 import com.example.Animal;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class AnimalTest {
-    private Animal animal = new Animal();
 
     @Test
     public void getFoodTest() {
-        try {
+        Exception exception = Assert.assertThrows(Exception.class, () -> {
+            Animal animal = new Animal();
             animal.getFood("Всеядный");
-        } catch (Exception UnknownAnimalKind) {
-            String actualResult = UnknownAnimalKind.getMessage();
-            assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник", actualResult);
-        }
+        });
+        String actualResult = exception.getMessage();
+        assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник", actualResult);
     }
+
 
     @Test
     public void getFamilyTest() {
